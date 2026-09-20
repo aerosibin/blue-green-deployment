@@ -13,7 +13,7 @@ pipeline {
                 // Ensure a shared Docker network and the Nginx proxy exist
                 bat '''
                     docker network inspect app-network >nul 2>&1 || docker network create app-network
-                    docker ps --format "{{.Names}}" | findstr "nginx-router" >nul 2>&1 || docker run -d --name nginx-router -p 80:80 --network app-network nginx:alpine
+                    docker ps --format "{{.Names}}" | findstr "nginx-router" >nul 2>&1 || docker run -d --name nginx-router -p 8000:80 --network app-network nginx:alpine
                 '''
             }
         }

@@ -54,9 +54,9 @@ pipeline {
 
         stage('Health Check') {
             steps {
-                // Allow Node.js to boot, then verify the /status endpoint using the internal Docker network
+                // Allow Node.js 5 seconds to boot, then verify the /status endpoint
                 bat '''
-                    timeout /t 5 /nobreak >nul
+                    ping 127.0.0.1 -n 6 > nul
                     docker exec nginx-router wget -qO- http://node-%TARGET_ENV%:3000/status
                 '''
             }
